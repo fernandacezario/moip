@@ -1,0 +1,179 @@
+Feature: Validação individual dos campos do json de pagamento
+        Validar campos obrigatórios do json de pagamento
+        E validar pagamento com metodo cartão de crédito
+        E validar pagamento com metodo boleto
+        E validar pagamento sem meio de pagamento
+        E validar um pagamento para um pedido já pago
+        E validar visualização dos dados do pedido e pagamento na conta moip do cliente
+
+
+Pré requisito: Estrutura do json para realização do pagamento
+  Vide no doc Readme a estrutura que deve ser inserida nos cenários.
+  Criar um pedido e utilizar o id na url no lugar do => {order_id}
+
+Cenário: Validar campo número de parcelas do pagamento com valor válido
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/orders/{order_id}/payments"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de pagamento de um pedido com cartão de crédito
+  E inserir no campo número de parcelas o caracter 1
+  E clicar no botão send
+  Então o sistema deverá retornar status 201
+
+Cenário: Validar campo número de parcelas do pagamento com valor inválido
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/orders/{order_id}/payments"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de pagamento de um pedido com cartão de crédito
+  E inserir no campo número de parcelas o caracter 13
+  E clicar no botão send
+  Então o sistema deverá retornar status 400
+  E informar que o número de parcelas é no mínimo 1 e no máximo 12
+
+Cenário: Validar campo número de parcelas do pagamento com valor 0
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/orders/{order_id}/payments"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de pagamento de um pedido com cartão de crédito
+  E inserir no campo número de parcelas o caracter 0
+  E clicar no botão send
+  Então o sistema deverá retornar status 400
+  E informar que o número de parcelas não deve ser negativo
+
+Cenário: Validar campo número de parcelas do pagamento em branco
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/orders/{order_id}/payments"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de pagamento de um pedido com cartão de crédito
+  E no campo número de parcelas deixar em branco
+  E clicar no botão send
+  Então o sistema deverá retornar status 201
+
+Cenário: Validar campo meio de pagamento com cartão de crédito
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/orders/{order_id}/payments"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de pagamento de um pedido com cartão de crédito
+  E no campo meio de pagamento inserir CREDIT_CARD
+  E clicar no botão send
+  Então o sistema deverá retornar status 201
+
+Cenário: Validar campo meio de pagamento com boleto
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/orders/{order_id}/payments"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de pagamento de um pedido com boleto
+  E no campo meio de pagamento inserir BOLETO
+  E clicar no botão send
+  Então o sistema deverá retornar status 201
+
+Cenário: Validar campo meio de pagamento com opção inválida
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/orders/{order_id}/payments"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de pagamento de um pedido
+  E no campo meio de pagamento inserir DEBIT_CARD
+  E clicar no botão send
+  Então o sistema deverá retornar status 400
+  E informar que o meio de pagamento informado não está disponível
+
+Cenário: Validar retirada do json do campo meio de pagamento
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/orders/{order_id}/payments"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json de pagamento:
+  {
+    "installmentCount": 1,
+    "fundingInstrument": {
+    }
+  }
+  E clicar no botão send
+  Então o sistema deverá retornar status 400
+  E informar que o meio de pagamento não pode ser nulo
+
+Cenário: Validar um pagamento para um pedido já pago
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/orders/{order_id}/payments"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de pagamento de um pedido com cartão de crédito
+  E clicar no botão send
+  Então o sistema deverá retornar status 201
+  Quando eu tentar realizar um novo pagamento para um pedido já realizado
+  Então o sistema deverá retornar status 400
+  E informar que já existe um pagamento realizado
+
+Cenário: Validar visualização de um pedido e pagamento do cliente no MOIP
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/orders/{order_id}/payments"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de pagamento de um pedido com cartão de crédito
+  E clicar no botão send
+  Então o sistema deverá retornar status 201
+  Quando eu acessar a url "https://conta-sandbox.moip.com.br/" através do navegador
+  E inserir o usuário
+  E inserir a senha
+  E clicar no botão "Acessar sua conta"
+  Então o usuário deverá ser logado na plataforma MOIP na aba "Resumo da conta"
+  E deverá ser exibido todos os pedidos com tentativa de pagamento já realizados na conta
+  E dentro desses pedidos deverá constar o pagamento em questão com o status "Pago"
+

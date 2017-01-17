@@ -1,0 +1,136 @@
+Relatórios de erros com Status 500 mapeados durante o ciclo de testes :
+
+1. Resultado obtido: Ao inserir exatos 65 caracteres no campo ownID e realizar o post, o sistema apresenta status 500 e não realiza a criação do cliente.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo ownId do json preencher com "Pedro Alcântara João Carlos Xavier de Paula de Bragança e Bourbon"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria realizar a criação do cliente e retornar status201
+
+2. Resultado obtido: Ao inserir mais de 65 caracteres no campo ownID e realizar o post, o sistema apresenta status 500.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo ownId do json preencher com "Pedro de Alcântara João Carlos Xavier de Paula de Bragança e Bourbon"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status 400 e informar que o campo ownID é limitado a 65 caracteres.
+
+3. Resultado obtido: Ao inserir mais de 32 caracteres no campo estado e realizar o post, o sistema apresenta status 500.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo estado do json preencher com "Estado do 100 Grande do Nordeste do Sul"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status 400 e informar que o campo estado é limitado a 32 caracteres.
+
+4. Resultado obtido: Ao inserir mais de 32 caracteres no campo estado e realizar o post, o sistema apresenta status 500, porém ao ajustar para a quantidade correta de caracteres e tentar realizar o post novamente, o sistema informa que já existe um customer com o identificador informado.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo estado do json preencher com "Estado do 100 Grande do Nordeste do Sul"
+	E clicar no botão send
+	Então o sistema informa que já existe um customer com o identificador informado
+	Quando eu ajustar o campo estado do json para "Estado do Rio Grande do Norte"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria realizar a criação do cliente e retornar status201
+
+5. Resultado obtido: Ao inserir mais de 90 caracteres no campo nome completo e realizar o post, o sistema apresenta status 500.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo nome completo do json preencher com "Pedro de Alcântara Francisco Antônio João Carlos Xavier Paula Miguel Rafael Joaquim José "
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status 400 e informar que o campo nome completo é limitado a 90 caracteres.
+
+6. Resultado obtido: Ao inserir mais de 45 caracteres no campo e-mail e realizar o post, o sistema apresenta status 500.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar formato json
+	E inserir o json padrão de criação de cliente
+	E no campo e-mail do json preencher com "joao_pedro_alcantaras_machado_da_silva@gmail.com"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status 400 e informar que o campo e-mail é limitado a 45 caracteres.
+
+7. Resultado obtido: Ao inserir de 151 a 256 caracteres no campo nome do produto e realizar o post, o sistema apresenta status 500 e não realiza a criação do pedido.
+
+Passo a passo:
+
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/orders"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de pedido
+	E no campo nome do produto do pedido do json preencher com "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500."
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria realizar a criação do pedido e retornar status201

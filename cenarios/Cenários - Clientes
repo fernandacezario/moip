@@ -1,0 +1,1376 @@
+Feature: Validação individual dos campos do json de cadastro de cliente
+    Criação de um cliente com sucesso
+    E validar resposta de criação de cliente
+    E tentar criar um cliente sem preencher a chave e valor
+    E tentar criar um cliente com um ownID já utilizado
+    E tentar criar um cliente somente com url, chave e valor, sem o json
+    E validar campos obrigatórios para criação de um cliente.
+
+Pré requisito: Estrutura do json para criação de cliente
+  Vide no doc Readme a estrutura que deve ser inserida nos cenários.
+
+Cenário: Validar campo ownID com exatos 65 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo ownId do json preencher com "Pedro Alcântara João Carlos Xavier de Paula de Bragança e Bourbon"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo ownID com mais de 65 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo ownId do json preencher com "Pedro de Alcântara João Carlos Xavier de Paula de Bragança e Bourbon"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo ownID é limitado a 65 caracteres
+
+Cenário: Validar campo ownID com preenchimento de caracteres numericos
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo ownId do json preencher com "999"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+  
+Cenário: Validar campo ownID com preenchimento de caracteres alfanumericos
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo ownId do json preencher com "Teste_moip_999"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo ownID contendo caracteres especiais
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo ownId do json preencher com "Teste_moip_999@999"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo nome completo com exatos 90 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo nome completo do json preencher com "Pedro de Alcântara Francisco Antônio João Carlos Xavier Paulas Miguel Rafael Joaquim José "
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo nome completo com mais de 90 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo nome completo do json preencher com "Pedro de Alcântara Francisco Antônio João Carlos Xavier Paula Miguel Rafael Joaquim José "
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo nome completo é limitado a 90 caracteres
+
+Cenário: Validar campo nome completo com preenchimento de caracteres numericos
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo nome completo do json preencher com "1234567"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo nome completo com preenchimento de caracteres alfanumericos
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo nome completo do json preencher com "Pedro 1234567"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo nome completo com preenchimento de caracteres especiais
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo nome completo do json preencher com "João Pedro de_Alcântara"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo e-mail com exatos 45 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo e-mail do json preencher com "joao_pedro_alcantaras_machado_silva@gmail.com"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo e-mail com mais de 45 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar formato json
+  E inserir o json padrão de criação de cliente
+  E no campo e-mail do json preencher com "joao_pedro_alcantaras_machado_da_silva@gmail.com"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo e-mail é limitado a caracteres
+
+Cenário: Validar campo e-mail sem @ (formato inválido)
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo e-mail do json preencher com "joao_pedro_alcantaras_machado_silvagmail.com"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o e-mail informado é inválido
+
+Cenário: Validar campo e-mail sem . depois do @ (formato inválido)
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo e-mail do json preencher com "joao_pedro_alcantara_machado_silva@gmail"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o e-mail informado é inválido
+
+Cenário: Validar campo e-mail com preenchimento de caracteres numericos
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo e-mail do json preencher com "12345@gmail.com"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo e-mail com preenchimento de caracteres especiais
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo e-mail do json preencher com "123_45&pedro@gmail.com"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo código do país com exatos 2 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo código do país do json preencher com "55"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo código do país com mais de 2 caracteres 
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo código do país do json preencher com "555"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo código do país é limitado a 2 caracteres
+
+Cenário: Validar campo código do país com preenchimento formato inválido
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo código do país do json preencher com "AA"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo código do país deverá ser preenchido somente com caracteres numericos
+
+Cenário: Validar campo código do país com preenchimento dado internacional
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo código do país do json preencher com "49"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+  E inserir o 55 como código do país
+
+Cenário: Validar campo código de área com exatos 2 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo código de área do json preencher com "11"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo código de área com mais de 2 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo código de área do json preencher com "176"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo código do país é limitado a 2 caracteres
+
+Cenário: Validar campo código do país com preenchimento formato inválido
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo código do país do json preencher com "AB"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo código de área deverá ser preenchido somente com caracteres numericos
+
+Cenário: Validar campo número de contato com exatos 9 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número de contato do json preencher com "123456789"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo número de contato com 10 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número de contato do json preencher com "1234567890"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo número de contato é limitado a 9 caracteres
+
+Cenário: Validar campo número de contato com mais de 12 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número de contato do json preencher com "123456789012"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo número de contato é limitado a 9 caracteres
+
+Cenário: Validar campo número de contato com menos 7 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número de contato do json preencher com "1234567"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo número de contato é inválido
+
+Cenário: Validar campo número de contato com preenchimento formato inválido
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número de contato do json preencher com "A12345678"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo número de contato deverá ser preenchido somente com caracteres numericos
+
+Cenário: Validar campo número de contato com preenchimento ultilizando mascara
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número de contato do json preencher com "12345-6789"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo data de nascimento com formato aaaa-mm-dd
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo data de nascimento do json preencher com "1983-11-10"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo data de nascimento com formato dd-mm-aaaa
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo data de nascimento do json preencher com "10-11-1983"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo data de nascimento informada é inválida
+
+Cenário: Validar campo data de nascimento com preenchimento formato inválido aa-mm-dd
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo data de nascimento do json preencher com "83-11-10"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo data de nascimento informada é inválida
+
+Cenário: Validar campo tipo documento com preenchimento CPF
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo tipo de documento preencher com "CPF"
+  E no campo número cpf do json preencher com "12345678910"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo tipo documento com preenchimento CNPJ
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo tipo de documento preencher com "CPF"
+  E no campo número cnpj do json preencher com "12345678912345"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo tipo documento com preenchimento inválido
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo tipo de documento preencher com "RG"
+  E no campo número cnpj do json preencher com "12345678912"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o tipo de documento é inválido
+
+Cenário: Validar campo número cpf com exatos 11 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número cpf do json preencher com "12345678910"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo número cpf com mais de 11 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número cpf do json preencher com "123456789123"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo número CPF deve ter 11 números
+
+Cenário: Validar campo número cpf com menos de 11 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número cpf do json preencher com "1234567890"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo número CPF deve ter 11 números
+
+Cenário: Validar campo número cpf com caracteres inválidos
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número cpf do json preencher com "1234567891ab"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo número CPF deve ter 11 números
+
+Cenário: Validar campo número cpf com preenchimento ultilizando mascara
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número cpf do json preencher com "123.456.789-12"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo número cnpj com exatos 14 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número cnpj do json preencher com "12345678912345"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo número cnpj com mais de 14 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número cnpj do json preencher com "123456789123456"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo número CNPJ deve ter 14 números
+
+Cenário: Validar campo número cpf com menos de 14 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número cnpj do json preencher com "1234567890"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo número CNPJ deve ter 14 números
+
+Cenário: Validar campo número cnpj com caracteres inválidos
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número cnpj do json preencher com "1234567891ab"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo número CNPJ deve ter 14 números
+
+Cenário: Validar campo número cnpj com preenchimento ultilizando mascara
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número cnpj do json preencher com "54.052.752/0001-25"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo rua com exatos 45 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo rua do json preencher com "Rua Senhora da Purificação Desemboque Sagrado"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo rua com mais de 45 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo rua do json preencher com "Rua Nossa Senhora da Purificação do Desemboque Sagrado"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo rua é limitado a 45 caracteres
+
+Cenário: Validar campo rua com preenchimento de caracteres alfanumericos
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo rua do json preencher com "L1 Norte"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo rua contendo caracteres especiais
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo rua do json preencher com "L1 Norte *& Lado b2"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo número da rua com exatos 10 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número da rua do json preencher com "1234567890"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo número da rua com mais de 10 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número da rua do json preencher com "12345678901"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo número da rua é limitado a 10 caracteres
+
+Cenário: Validar campo número da rua com preenchimento de caracteres alfanumericos
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número da rua do json preencher com "L1 Norte"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo número da rua contendo caracteres especiais
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número da rua do json preencher com "*& Lado b2"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo complemento com exatos 45 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo complemento do json preencher com "Apartamento 1 Lado b Vila do amor Distrito c"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo complemento com mais de 45 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo complemento do json preencher com "Apartamento 110 Lado b Vila do amor Distrito c"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo complemento é limitado a 45 caracteres
+
+Cenário: Validar campo complemento com preenchimento de caracteres especiais
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo complemento do json preencher com "Apartamento 110 Lado b & a *obs"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo distrito com exatos 45 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo distrito do json preencher com "Chacara Santo Antonio 10 dos Pinhais do Montes"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo número da rua com mais de 45 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo distrito do json preencher com "Chacara Santo Antonio dos Pinhais dos Montes Claros"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo distrito é limitado a 45 caracteres
+
+Cenário: Validar campo distrito contendo caracteres especiais
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo distrito do json preencher com "Chacara Santo Antônio João dos Pinhais@"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo cidade com exatos 32 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo cidade do json preencher com "Vila Bela 20 Santíssima Trindade"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo cidade com mais de 32 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo cidade do json preencher com "Vila Bela Santíssima Trindade Raimundo"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo cidade é limitado a 32 caracteres
+
+Cenário: Validar campo cidade contendo caracteres especiais
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo distrito do json preencher com "Vila Bela Santíssima Trindade $%ˆ&"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo estado com exatos 32 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo estado do json preencher com "Estado do 100 Grande do Nordeste"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo estado com mais de 32 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo estado do json preencher com "Estado do 100 Grande do Nordeste do Sul"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo estado é limitado a 32 caracteres
+
+Cenário: Validar campo estado contendo caracteres especiais
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo estado do json preencher com "Estado do Rio João Nordeste *&ˆ%"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo país com exatos 3 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo país do json preencher com "EUA"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo país com mais de 3 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo país do json preencher com "ARGENTINA"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar os valores aceitos ao cliente
+
+Cenário: Validar campo país contendo caracteres especiais
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo país do json preencher com "T&T"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo cep com exatos 9 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo cep do json preencher com "04714001"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar campo cep com mais de 9 caracteres
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo cep do json preencher com "047140011"
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o campo cep é limitado a 9 caracteres
+
+Cenário: Validar campo país contendo formatação
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo país do json preencher com "04714-001"
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+
+Cenário: Validar criação de um cliente e resposta com sucesso
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente preenchido corretamente
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+  E gerar um json de resposta contendo todos os dados inseridos, mais a data de criação do cliente
+
+Cenário: Validar criação de um cliente com um ownID já utilizado
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente preenchido corretamente
+  E no campo ownId do json preencher com um já utilizado e criado cliente
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o identificador próprio deve ser único e que já existe um customer com o identificador informado
+
+Cenário: Validar post de criação de cliente sem preencher a chave e valor
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente preenchido corretamente
+  E clicar no botão send
+  Então o sistema deverá retornar status401
+  E informar que a chave ou o valor são inválidos 
+
+Cenário: Validar post para criação de um cliente sem o json 
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o e-mail não foi informado
+  E informar que o nome não foi informado
+  E informar que o identificador próprio não foi informado
+
+Cenário: Validar campo obrigatório ownID em branco 
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo ownId do json deixar em branco
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o identificador próprio não foi informado
+
+Cenário: Validar campo obrigatório e-mail em branco 
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo e-mail do json deixar em branco
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o e-mail não foi informado
+
+Cenário: Validar retirada dos dados documento e criação de um cliente
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E retirar do json os dados do documento
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+  E gerar um json de resposta contendo todos os dados inseridos, mais a data de criação do cliente
+
+Cenário: Validar retirada dos dados telefone e criação de um cliente
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E retirar do json os dados do telefone
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+  E gerar um json de resposta contendo todos os dados inseridos, mais a data de criação do cliente
+
+Cenário: Validar retirada todos os dados do endereço de entrega e criação de um cliente
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E retirar do json todos os dados do endereço de entrega
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+  E gerar um json de resposta contendo todos os dados inseridos, mais a data de criação do cliente
+
+Cenário: Validar campo obrigatório logradouro do endereço de entrega em branco
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo logradouro do endereço de entregar do json deixar em branco
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que o logradouro do endereço de entrega não foi informado
+
+Cenário: Validar campo obrigatório número do endereço de entrega em branco 
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo número do endereço de entregar do json deixar em branco
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que a número não foi informada
+
+Cenário: Validar campo obrigatório complemento do endereço de entrega em branco
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo complemento do endereço de entregar do json deixar em branco
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que a complemento não foi informada
+
+Cenário: Validar campo obrigatório bairro do endereço de entrega em branco 
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo bairro do endereço de entregar do json deixar em branco
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que a bairro não foi informada
+
+Cenário: Validar campo obrigatório cidade do endereço de entrega em branco 
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo cidade do endereço de entregar do json deixar em branco
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que a cidade não foi informada
+
+Cenário: Validar campo obrigatório estado do endereço de entrega em branco 
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo estado do endereço de entregar do json deixar em branco
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que a estado não foi informada
+
+Cenário: Validar campo obrigatório país do endereço de entrega em branco 
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo país do endereço de entregar do json deixar em branco
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que a país não foi informada
+
+Cenário: Validar campo obrigatório cep do endereço de entrega em branco 
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente
+  E no campo cep do endereço de entregar do json deixar em branco
+  E clicar no botão send
+  Então o sistema deverá retornar status400
+  E informar que a cep não foi informada

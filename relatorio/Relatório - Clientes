@@ -1,0 +1,345 @@
+Relatórios de erros mapeados durante o ciclo de testes de criação de cliente.
+
+1. Resultado obtido: Ao preencher o campo código país com formato inválido, o sistema realiza a criação do cliente.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo código do país do json preencher com "AA"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status 400 e informar que o campo código do país deveria ser preenchido com caracteres numericos.
+
+2. Resultado obtido: Ao preencher o campo código de área com mais de 2 caracteres, o sistema realiza a criação do cliente, porém registra somente os 2 primeiros digitos.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo código de área do json preencher com "176"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status 400 e informar que o campo código do país é limitado a 2 caracteres.
+
+3. Resultado obtido: Ao preencher o campo número de contato com mais de 10 caracteres, o sistema sobrescreve o que foi inserido no código de área com os 2 primeiros números registrados no contato e mantendo 8 números no contato.
+
+ Valores inseridos:
+ 	"phone": {
+    "countryCode": "49",
+    "areaCode": "11",
+    "number": "1234567890"
+
+Valores registrados:
+	"phone": {
+    "countryCode": "55",
+    "areaCode": "12",
+    "number": "34567890"
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo número de contato do json preencher com "1234567890"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status 400 e informar que o campo número de contato é limitado a 9 caracteres.
+
+4. Resultado obtido: Ao preencher o campo número de contato com mais de 12 caracteres, o sistema cria o cliente porém não registra o código de área e o contato informados.
+
+Valores inseridos:
+    "phone": {
+    "countryCode": "49",
+    "areaCode": "11",
+    "number": "123456789012"
+
+Valores registrados:
+    "phone": {
+    "countryCode": "55",
+    "areaCode": "",
+    "number": ""
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo número de contato do json preencher com "123456789012"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status 400 e informar que o campo número de contato é limitado a 9 caracteres.
+
+5. Resultado obtido: Ao preencher o campo número de contato com menos de 7 caracteres, o sistema cria o cliente porém apaga o código de área e passa os dados para o número de contato.
+
+Valores inseridos:
+    "phone": {
+    "countryCode": "55",
+    "areaCode": "11",
+    "number": "1234567"
+
+Valores registrados:
+    "phone": {
+    "countryCode": "55",
+    "areaCode": "",
+    "number": "111234567"
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo número de contato do json preencher com "1234567"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status 400 e informar que o campo número de contato é inválido.
+
+6. Resultado obtido: Ao preencher o campo número de contato com 9 digitos + mascara, o sistema sobrescreve o código de área com os 2 primeiros números registrados no contato e mantem 7 números no contato.
+
+Valores inseridos:
+    "phone": {
+    "countryCode": "55",
+    "areaCode": "11",
+    "number": "12345-6789"
+
+Valores registrados:
+    "phone": {
+    "countryCode": "55",
+    "areaCode": "12",
+    "number": "345-6789"
+    
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo número de contato do json preencher com "12345-6789"
+
+Resultado esperado: O sistema deveria retornar status 201 e cadastrar o cliente.
+
+7. Resultado obtido: Ao preencher o campo rua com mais de 45 caracteres, o sistema cria o cliente, porém ao completar 45 caracteres não registra o restante do endereço preenchido.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo rua do json preencher com "Rua Nossa Senhora da Purificação do Desemboque Sagrado"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status 400 e informar que o campo rua é limitado a 45 caracteres.
+
+8. Resultado obtido: Ao preencher o campo número da rua com mais de 10 caracteres, o sistema cria o cliente, porém registra reticências a partir do 7o número.
+
+Valore inserido:
+    "streetNumber": "12345678901",
+
+Valore registrado:
+    "streetNumber": "1234567...",
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo número da rua do json preencher com "12345678901"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status 400 e informar que o campo número da rua é limitado a 10 caracteres.
+
+9. Resultado obtido: Ao preencher o campo complemento com mais de 45 caracteres, o sistema cria o cliente.
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo complemento do json preencher com "Apartamento 110 Lado b Vila do amor Distrito c"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status 400 e informar que o campo complemento é limitado a 45 caracteres.
+
+10. Resultado obtido: Ao preencher o campo cidade com mais de 32 caracteres, o sistema cria o cliente, porém a partir do 32o caracter não registra mais.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo cidade do json preencher com "Vila Bela Santíssima Trindade Raimundo"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status 400 e informar que o campo cidade é limitado a 32 caracteres.
+
+11. Resultado obtido: Ao preencher o campo país com mais de 3 caracteres, o sistema cria o cliente.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo país do json preencher com "ARGENTINA"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status 400 e informar os valores aceitos ao cliente.
+
+12. Resultado obtido: Ao preencher o campo cep com mais de 9 caracteres, o sistema cria o cliente.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo cep do json preencher com "047140011"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status 400 e informar que o campo cep é limitado a 32 caracteres.
+
+13. Resultado obtido: Ao inserir e-mail sem o . depois do @, o sistema cria o cliente.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E no campo e-mail do json preencher com "joao_pedro_alcantara_machado_silva@gmail"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status 400 e informar que o e-mail informado é inválido.
+
+14. Resultado obtido: Ao inserir na estrutura do json o shippingAddress, os campos cidade, bairro, logradouro, número, cep, estado e país tornam-se obrigatórios. Porém ao deixar qualquer um desses campos em branco e realizar um post o sistema cria o cliente e exibe status 201.
+
+Exemplo de valor inserido, campo logradouro em branco: 
+{
+  "ownId": "1005",
+  "fullname": "Fernanda Cezário",
+  "email": "fecezario83@gmail.com",
+  "birthDate": "1983-11-10",
+  "taxDocument": {
+    "type": "CNPJ",
+    "number": "54.052.752/0001-25"
+  },
+  "phone": {
+    "countryCode": "55",
+    "areaCode": "11",
+    "number": "12345-6789"
+  },
+  "shippingAddress": {
+    "city": "São Paulo",
+    "complement": "Apartamento 110 A",
+    "district": "Chacara Santo Antônio",
+    "street": "",
+    "streetNumber": "12345678901",
+    "zipCode": "04714-011",
+    "state": "São Paulo",
+    "country": "BRA"
+  }
+}
+
+Passo a passo: 
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/customers"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de cliente
+	E deixar um ou mais campos do endereço de entregar do json em branco
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status 400 e informar que o campo cidade, bairro, logradouro, número, cep, estado ou país do endereço de entrega não foi informado.

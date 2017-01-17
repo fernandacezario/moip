@@ -1,0 +1,40 @@
+Relatório de erros mapeados durante o ciclo de testes de pagamento de um pedido.
+
+1. Resultado obtido: Sistema deixa registrar o pagamento, retorna status 201, mesmo com valor incorreto no número de parcelas. Valor inserido como número de parcelas: 13.
+
+Passo a passo:
+
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/orders/{order_id}/payments"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de pagamento de um pedido com cartão de crédito
+  E inserir no campo número de parcelas o caracter 13
+  E clicar no botão send
+
+ Resultado esperado: O sistema deveria retornar status 400 e informar que o número de parcelas é no mínimo 1 e no máximo 12.
+
+2. Resultado obtido: Sistema não permite deixar campo parcelas de pagamento em branco, retorna status 400.
+
+Passo a passo:
+
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/orders/{order_id}/payments"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de pagamento de um pedido com cartão de crédito
+  E no campo número de parcelas deixar em branco
+  E clicar no botão send
+  Então o sistema deverá retornar status 201
+
+  Resultado esperado: O sistema deveria retornar status 201 e inserir no campo número de parcelas o valor: 1.

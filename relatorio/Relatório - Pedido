@@ -1,0 +1,249 @@
+Relatório de erros mapeados durante o ciclo de testes de criação de pedido.
+
+1. Resultado obtido: Ao inserir exatos 256 caracteres no campo nome do produto e realizar o post, o sistema apresenta status 400 e não realiza a criação do pedido.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/orders"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de pedido
+	E no campo nome do produto do pedido do json preencher com "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Is simply."
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria realizar a criação do pedido e retornar status201
+
+2. Resultado obtido: Ao inserir exatos 12 caracteres no campo quantidade de produtos e realizar o post, o sistema apresenta status 400, não realiza a criação do pedido e informa  que o campo deve conter entre 1 e 9999 digitos.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/orders"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de pedido
+	E no campo quantidade de produtos do pedido do json preencher com "100000000000"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria realizar a criação do pedido e retornar status201
+
+3. Resultado obtido: Ao inserir mais de 12 caracteres no campo quantidade de produtos e realizar o post, o sistema apresenta status 400(correto), porém não apresenta nenhuma mensagem de retorno ao usuário.
+
+Passo a passo:
+
+Cenário: Validar campo quantidade de produtos do pedido com mais de 12 caracteres
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/orders"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de pedido
+	E no campo quantidade de produtos do pedido do json preencher com "1000000000000"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria informar que o campo quantidade de produtos é limitado a 12 caracteres.
+
+4. Resultado obtido: Ao inserir exatos 12 caracteres no campo valor inicial do item e realizar o post, o sistema apresenta status 400, não realiza a criação do pedido e informa que aceita somente 6 caracteres no campo.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/orders"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de pedido
+	E no campo valor inicial do item do pedido do json preencher com "100000000000"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria realizar a criação do pedido e retornar status201
+
+5. Resultado obtido: Ao inserir mais de 12 caracteres no campo valor inicial do item e realizar o post, o sistema apresenta status 400(correto), porém não apresenta nenhuma mensagem de retorno ao usuário.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/orders"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de pedido
+	E no campo valor inicial do item do pedido do json preencher com "1000000000000"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria informar que o campo valor inicial do item é limitado a 12 caracteres.
+
+6. Resultado obtido: Ao inserir caracteres inválidos no campo valor inicial do item e realizar o post, o sistema apresenta status 400(correto), porém não apresenta mensagem amigável de retorno ao usuário.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/orders"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de pedido
+	E no campo valor inicial do item do pedido do json preencher com "R$ 10,00"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria informar que o campo valor inicial do item deve ser preenchido somente com caracteres numericos.
+
+7. Resultado obtido: Ao inserir exatos 65 caracteres no campo ownID e realizar o post, o sistema apresenta status 400 e informa que o identificador próprio de pedido deve ter no máximo 45 caracteres.
+
+Passo a passo:
+Cenário: Validar campo ownID do pedido com exatos 65 caracteres
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/orders"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de pedido
+	E no campo ownId do pedido do json preencher com "123456789012345678901234Teste_MOIP_123456789012345678901234567890"
+	E clicar no botão send
+
+Resultado esperado: Resultado esperado: O sistema deveria realizar a criação do pedido e retornar status201.
+
+8. Resultado obtido: Ao inserir exatos 12 caracteres no campo valor do frete e realizar o post, o sistema apresenta status 400 e informa que o identificador próprio de pedido deve ter no máximo 9 caracteres.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/orders"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de pedido
+	E no campo valor do frete do pedido do json preencher com "100000000000"
+	E clicar no botão send
+
+Resultado esperado: Resultado esperado: O sistema deveria realizar a criação do pedido e retornar status201.
+
+9. Resultado obtido: Ao inserir mais de 12 caracteres no campo valor do frete e realizar o post, o sistema apresenta status 400(correto), porém não apresenta nenhuma mensagem de retorno ao usuário.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/orders"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de pedido
+	E no campo valor do frete do pedido do json preencher com "1000000000000"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria informar que o campo valor inicial do item é limitado a 12 caracteres.
+
+10. Resultado obtido: Ao inserir caracteres inválidos no campo valor do frete e realizar o post, o sistema apresenta status 400(correto), porém não apresenta nenhuma mensagem amigável ao usuário.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/orders"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de pedido
+	E no campo valor do frete do pedido do json preencher com "R$ 10,00"
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria informar que o campo valor do frete deve ser preenchido somente com caracteres numericos.
+
+11. Resultado obtido: Ao criar um novo pedido com um ownID de pedido já utilizado, o sistema apresenta status 201 criando um novo pedido com um ID já existente.
+
+Passo a passo:
+
+	Dado o aplicativo Postman
+	Quando eu selecionar a opção Post
+	E preencher url com "https://sandbox.moip.com.br/v2/orders"
+	E selecionar a opção header
+	E dentro do header preencher o campo chave com "Authorization"
+	E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+	E selecionar a opção body
+	E dentro do body selecionar opção raw
+	E selecionar o formato json
+	E inserir o json padrão de criação de pedido preenchido corretamente
+	E no campo ownId do json preencher com um já utilizado e criado pedido
+	E clicar no botão send
+
+Resultado esperado: O sistema deveria informar que o identificador próprio deve ser único e que já existe um pedido com o identificador informado e deveria retornar status 400, não registrando o pedido.
+
+12. Resultado obtido: Ao tentar criar um novo pedido sem a inclusão dos dados de um novo cliente ou um já existe, o sistema cria o pedido.
+
+Valores inseridos:
+{
+    "ownId": "meuid",
+    "amount": {
+      "currency": "BRL",
+      "subtotals": {
+        "shipping": 10
+      }
+    },
+    "items": [
+      {
+        "product": "Chocolate",
+        "quantity": 100,
+        "detail": "Milka Oreo",
+        "price": 3
+      }
+    ]
+  }
+
+Passo a passo:
+
+Cenário: Validar criação de um pedido sem cliente
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/orders"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de pedido preenchido sem um cliente
+  E clicar no botão send
+
+Resultado esperado: O sistema deveria retornar status400 e informar que é necessário os dados do cliente para abertura de um pedido.

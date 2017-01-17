@@ -1,0 +1,80 @@
+Para criação dos cenários de testes foi utilizado o Cucumber, ele é usado normalmente para descrever o valor do negócio em uma linguagem natural, por isso permite que equipes de desenvolvimento de software descrevam como o software deve se comportar em texto simples, escrevendo especificações através de exemplos. Uma boa vantagem de escrever especificações com Cucumber é que qualquer um na equipe consegue ler e entender as especificações em texto simples - de pessoas de negócios a desenvolvedores de software.
+A estrutura que o Cucumber usa para as especificações é o formato Given/When/Then em conformidade com gramática da linguagem Gherkin."
+
+Exemplo de cenário com cucumber/gherkin:
+
+Cenário: Validar criação de um cliente e resposta com sucesso
+  Dado o aplicativo Postman
+  Quando eu selecionar a opção Post
+  E preencher url com "https://sandbox.moip.com.br/v2/customers"
+  E selecionar a opção header
+  E dentro do header preencher o campo chave com "Authorization"
+  E dentro do header preencher o campo valor com "Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg=="
+  E selecionar a opção body
+  E dentro do body selecionar opção raw
+  E selecionar o formato json
+  E inserir o json padrão de criação de cliente preenchido corretamente
+  E clicar no botão send
+  Então o sistema deverá retornar status201
+  E gerar um json de resposta contendo todos os dados inseridos, mais a data de criação do cliente
+
+Porém, também temos outras opções para criação de cenários de testes.
+Outra abordagem é iniciar sobre o objetivo do teste, seguido por uma pré-condição, que lista todos os itens ou condições que devem estar disponíveis para realizar o teste.
+Em seguida, descrevemos a pós-condição que possui uma breve descrição do que deverá acontecer no término do teste.
+Finalmente, partimos para a descrição do passo-a-passo, onde para cada passo descrito deve conter um ponto de verificação citando o resultado do passo executado.
+
+Exemplo deste tipo de cenário:
+
+Objetivo: Criação de um cliente
+
+Pré condição: 
+	Possuir o aplicativo Postman instalado na maquina de trabalho;
+	Possuir uma conta no ambiente sandbox MOIP;
+	Possuir chave e valor válidos no MOIP;
+	Possuir json válido para criação de um cliente.
+
+Pós condição: Deverá ser exibido status 201 e gerar json de resposta de criação de cliente.
+
+  Ação: Abrir o aplicativo Postman
+  Resultado esperado: O aplicativo deverá ser exibido com sucesso
+  Ação: Na parte superior selecionar a opção GET e alterar para POST
+  Resultado esperado: A opção exibida deverá ser POST
+  Ação: Preencher o campo que fica na frente da opção POST com: "https://sandbox.moip.com.br/v2/customers"
+  Ação: Abaixo do campo url selecionar: Headers
+  Resultado esperado: Exibição dos campos key e value
+  Ação: Preencher o campo key com: Authorization
+  Ação: Preencher o campo value com chave válida no MOIP (pré condição): Basic V1hJWFVMUUhMVUtPN0hQS0pCNE5USFVTUlFWT0RNN0s6RklDVldWUTlSVFE1WkhRRVhNUFFLNUdTWlJKVFpPTEtMWlFHTTc0Qg==
+  Ação: Abaixo do campo url selecionar: Body
+  Resultado esperado: Exibição das opções form-data, x-www-form-unlercoded, raw e  binary
+  Ação: Selecionar a opção raw
+  Resultado esperado: Exibição dos opções text, text/plain, json, javascript, xml application, xml text e html
+  Ação: Selecionar a opção json
+  Ação: No campo de texto inserir o json abaixo para criação de cliente (pré condição)
+  {
+  "ownId": "0001", 
+  "fullname": "Fernanda Cezário", 
+  "email": "cezario@gmail.com", 
+  "birthDate": "1983-11-10", 
+
+  "taxDocument": { 
+    "type": "CPF", 
+    "number": "12345678901" 
+  },
+  "phone": { 
+    "countryCode": "55",
+    "areaCode": "11", 
+    "number": "912341234"
+  },
+  "shippingAddress": { 
+    "city": "São Paulo", 
+    "complement": "Apartamento A",
+    "district": "Chacara Santo Antônio", 
+    "street": "Rua Antônio das Chagas", 
+    "streetNumber": "94", 
+    "zipCode": "04714001", 
+    "state": "São Paulo", 
+    "country": "Brasil" 
+  }
+}
+  Ação: Clicar no botão send
+  Resultado esperado: No campo status logo abaixo do campo de texto deverá ser exibido Status: 201 Created e o json gerado de resultado da criação do cliente contendo os dados do json de criação.
